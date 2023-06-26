@@ -1,0 +1,22 @@
+<div class="social-button-container">
+<div class="social-button"><script src="//platform.linkedin.com/in.js" type="text/javascript">  lang: en_US</script>
+<script type="IN/Share" data-counter="right" data-url="<%= root_url+"projects/"+project.position.to_s+ "-"+project.permalink %>" data-showzero="N"></script></div>
+<div class="social-button">
+<a class="twitter-share-button"
+  href="https://twitter.com/share"
+  data-url="<%= root_url+"projects/"+project.position.to_s+ "-"+project.permalink %>"
+  data-via="GrepSlash"
+  data-text="<%= project.name %>">
+Tweet
+</a>
+</div>
+<div class="fb-like social-button" style="margin-top:0px;padding-top:0px;" data-href="<%= root_url+"projects/"+project.position.to_s+ "-"+project.permalink %>" data-width="100" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+</div>
+<!-- Place this tag after the last share tag. -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>

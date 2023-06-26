@@ -1,0 +1,70 @@
+<div class="project"  >
+
+  <div class="screenshot"><%= link_to image_tag(project.imageurl, :size => "200x125", :alt => project.name,lazy: true), project, :remote=>true %></div>
+
+  <div class="main">
+   
+    <div class="info" style="color:#38761D;display:inline-block;">
+      <span class="number">Project #<%= project.position %></span> &ndash;
+      <span class="published_at"><%= project.published_at.strftime('%b %d, %Y') %></span>
+    </div>
+	
+	<div class="project-title-container">
+		<div class="project-title-element"><h2><%= link_to project.name, project, :target => "_blank" %></h2></div>
+		<div class="favourite project-title-element" style="cursor:pointer;">
+		<span class="addtofav" title="Add to favourites"></span></div>
+		<% if project.collaborationRequired==true%>
+		<div id="collaboration_required" class="project-title-element">
+		<a title="Collaboration required"><img src="/images/icons/handshake2.png" height="35px"/></a></div>
+		<% end%>
+	</div>
+
+	<div class="description" ><%= project.notes %></div>
+	<div class="project-title-container">
+
+		<div id="project_vote" class="project-title-element">
+		<%= render :partial => "/votes/vote", :locals => { :project=>project} %>
+		</div>
+		
+		<div id="page_views" class="project-title-element">
+		<% if project.view_count == nil %>
+		Be the first to view this project
+		<% else %>
+		<%= pluralize(project.view_count, 'view') %> 
+		<% end %> 
+		</div>
+		
+		<div class="project-title-element">
+			<div class="project-title-container expand-click">
+				<div class="project-title-element">Quick view</div>
+				<span class="project-title-element triangle-right"></span>
+			</div>
+		</div>
+	</div>
+	
+	<div id="vote_error_message<%=project.id.to_s%>" style="color:red;"></div>
+	
+	<%# render :partial => 'projects/social', :locals => { :project => project} %>
+
+ </div>
+
+	<div class="project-expand-content">
+
+		<% if project.code_link != ''  %>
+   	 <div class="browse_code">
+      	<%= image_tag "icons/browse_code.png", :size => "22x21", :class => "icon" %>
+      	<%= link_to "Browse Source Code", "#{project.code_link}",:target => "_blank" %>
+		</div>
+      <% end %>
+		
+
+		<div class="description" ><%= project.description.html_safe %></div>
+		<div style="text-align:center;">
+			<%= render :partial => 'projects/social', :locals => { :project => project} %>
+		</div>
+				
+	</div>
+	
+	<div class="clear" ></div>
+	
+</div>

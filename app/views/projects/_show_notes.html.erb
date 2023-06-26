@@ -1,0 +1,10 @@
+<% if @project.code_link != ''  %>
+    <div class="browse_code" style="text-align:left;">
+      <%= image_tag "icons/browse_code.png", :size => "22x21", :class => "icon" %>
+
+      <%= link_to "Browse Source Code", "#{@project.code_link}",:target => "_blank" %>
+	</div>
+      <% end %>
+<div class="show_description">
+  <%=  @project.description.html_safe %>
+</div>

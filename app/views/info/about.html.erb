@@ -1,0 +1,38 @@
+<% cache ['v1','aboutPage'] do %>
+	<% title "About Grepslash", false %>
+        <%= stylesheet_link_tag Rails.env.production? ? 'about.min' :'about' %>
+	<div class="content" id="about" style="background:#E9F6EE;">
+	   <div style="text-align:center;">
+	  <div class="about_title">About Grepslash</div>
+	  </div>
+	<div class="about_text">
+	  <p style="margin:15px;">
+	  In today's world when we have to learn something, usually our first step is to surf the web and see what we can find. There are many portals for giving users access to the vast research and implementation that has already been done. But as users, we felt the need of such a portal which can present interesting projects in an organized way. Grepslash is about discovering content with ease and not just discovering, it is also a platform for authors who want to showcase their work to a community. So just upload a project without creating any account and share it on social media with just a click.</p>
+	  </div>
+	  
+	  <div class="about-contact-container">
+	  <div class="about-contact-element">For any queries or suggestions, please contact us at</div>
+	  <div class="about-contact-element"><img src="/images/contact.png"/></div>
+	  </div>
+	  <!--div>
+	  <div style="text-align:center">
+	  <div class="about_title">About the founders</div>
+	  </div>  
+	<table cellpadding="8">
+	<tr><td>
+	<div class="polaroid-images"><a href=""><img src="/images/vinayak.jpg" width="120" height="150"/></a></div>
+	</td>
+	<td valign="top"><div class="author-text">
+	<div class="author-name">Vinayak C Srinivas</div>
+	<p style="margin-left:15px;">
+	Vinayak is a co-founder and full stack developer at Grepslash. He completed his Masters from IIT Delhi in 2013. Apart from being a geek at heart he pursues poetry, music and various other stuff. <br> 
+	</p>
+	</div></td>
+	</tr>
+
+
+	</table>	
+	  
+	 </div-->
+	</div>
+	<% end %>

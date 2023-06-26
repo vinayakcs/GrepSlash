@@ -1,0 +1,41 @@
+<% title "GrepSlash", false %>
+    <%= stylesheet_link_tag Rails.env.production? ? 'feeds.min' :'feeds' %>
+    <%= javascript_include_tag Rails.env.production? ? 'feeds.min' :'feeds' %>
+<section id="wrapper" class="wrapper">
+
+  <!--h1 class="title">Latest feeds from top technological sites</h1-->
+
+  <div id="v-nav">
+
+  <ul>
+  <% real_index = 0 %>
+  <% @data_hash.keys.each_with_index do |feed,index| %>
+	<% if index != 0 and !@data_hash[feed].empty? %>
+		<% real_index += 1 %>
+	  <% if real_index == 1 %> 
+	  	<li tab="tab1" class="first current"><%=feed.upcase%></li>
+	  <% elsif @data_hash.length-1==index %>
+	  	<li tab="tab<%=real_index%>" class="last"><%=feed.upcase%></li>
+	   <% else %>
+	  	<li tab="tab<%=real_index%>" ><%=feed.upcase%></li>
+	  <% end %>
+	<%end%>
+  <%end%>
+ </ul>
+  <% @data_hash.keys.each_with_index do |feed,index| %>
+	<% if index != 0 and !@data_hash[feed].empty? %> 
+  		 <div class="tab-content">
+	   		<% @data_hash[feed].each do |item| %> 
+				<a href="<%= item['link'] %>" target="_blank" style="font-size:14px"><%= item['title'] %> </a><br><br>
+			<% end %> 
+		 </div>
+  	<%end%>
+  <%end%>
+    	
+</div>
+
+</section>
+
+
+
+

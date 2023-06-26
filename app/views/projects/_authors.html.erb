@@ -1,0 +1,13 @@
+
+<div id="authors">
+<% @project.authors.each do |i| %>
+<div class="author-image"><%= image_tag("/assets/authors/#{i.id}.png", :size => "150x175") %></div>
+<div style="display:inline-block;width:550px;vertical-align:top;">
+<div class="author-attribute">Name</div><div class="author-value"><%= i.name%></div><br>
+<div class="author-attribute">Affiliation</div><div class="author-value"><%= i.affiliation%></div><br>
+<div class="author-attribute">Bio</div><div class="author-value"><%= i.description%></div><br>
+<div class="author-attribute">Email ID</div><div class="author-value"><%= i.contact2%></div><br>
+<div class="author-attribute">Contact Number</div><div class="author-value"><%= i.contact1%></div><br>
+</div>
+<%end%>
+</div>

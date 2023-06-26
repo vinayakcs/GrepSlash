@@ -1,0 +1,11 @@
+.pretick{height:40px; width:40px; display:block; position:relative;border-radius:50px;-webkit-border-radius:50px;-moz-border-radius:50px; border:3px solid #009933; width:20px; height:20px;}
+
+.pretick:before, .pretick:after{content:''; height:3px; width:16px; display:block; background:#009933; border-radius:10px;-webkit-border-radius:10px;-moz-border-radius:10px; position:absolute; top:9px; left:2px;}
+
+.pretick:after{height:16px; width:3px; top:2px; left:9px;}
+
+.posttick{height:40px; width:40px; display:block; position:relative;border-radius:50px;-webkit-border-radius:50px;-moz-border-radius:50px; border:3px solid #009933; width:20px; height:20px;}
+
+.posttick:after, .posttick:before{content:''; height:14px; width:4px; display:block; background:#009933; position:absolute; top:5px; left:10px; border-radius:10px;-webkit-border-radius:10px;-moz-border-radius:10px; transform:rotate(45deg);-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-o-transform:rotate(45deg);-ms-transform:rotate(45deg);}
+
+.posttick:before{height:9px;width:4px; transform:rotate(-45deg);-webkit-transform:rotate(-45deg);-moz-transform:rotate(-45deg);-o-transform:rotate(-45deg);-ms-transform:rotate(-45deg); top:9px; left:5px;}

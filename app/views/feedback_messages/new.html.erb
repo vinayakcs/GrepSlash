@@ -1,0 +1,70 @@
+<% cache ['v1','submitProject'] do %>
+	<% title "Submission", false %>
+        <%= javascript_include_tag Rails.env.production? ? 'project_submit.min' :'project_submit' %>
+
+	<div class="content" style="background:#E9F6EE">
+          <div id="proj_sub" style="display:none;"></div>
+	  <div id="feedback" >
+	    <h2 class="bar" ><b>Submit your project</b></h2>
+	    <%= form_for @feedback_message, remote:true do |f| %>
+	      <%= f.error_messages %>
+	      <div class="info">
+	      </div>
+	      <div class="special_email_field">
+		<%= label_tag :email %>
+		<%= text_field_tag :email, "", :autocomplete => "off" %>
+		(do not fill)
+	      </div>
+	      <div class="field">
+		<%= f.label :name, "Author's Name*" %>
+		<%= f.text_field :name %>
+	      </div>
+	      <div class="field">
+		<%= f.label :email, "Email ID*" %>
+		<%= f.text_field :email %>
+	      </div>
+	      <div class="field" title="College or Company name">
+		<%= f.label :affiliation, "Author's Affiliation*" %>
+		<%= f.text_field :affiliation %>
+	      </div>
+	      <div class="field">
+		<%= f.label :title, "Project Title*" %>
+		<%= f.text_field :title %>
+	      </div>
+	      <div class="field">
+		<%= f.label :projectType, "Project Type" %>
+		<%=f.select(:projectType, options_for_select([['OpenSource', 'OpenSource'], ['Startup', 'Startup'], ['Research', 'Research']])) %>
+	      </div>
+	      <div class="field" title="URL to a representational image for project">
+		<%= f.label :image, "Representational image URL*" %>
+		<%= f.text_area :image, :rows => 2, :cols => 50 %>
+	      </div>
+	      <div class="field">
+		<%= f.label :content, "Project Description and Relevant Links*" %>
+		<%= f.text_area :content, :rows => 14, :cols => 50 %>
+	      </div>
+	      <div class="field">
+		<%= f.label :about, "About the Author*" %>
+		<%= f.text_area :about, :rows => 5, :cols => 50 %>
+	      </div>
+	      <div class="field" title="Mark this checkbox if you are looking for collaborators">
+		<%= f.label :collaborationRequired, "Looking for collaborators" %>
+		<%= f.check_box(:collaborationRequired, :class=>"collaboration_required_check_box") %>
+		<%= label_tag(:collaborationRequired, "Yes", ) %>
+	      </div>
+<br>
+	      <div class="field collabRequired" title="Required skill-set for collaborators">
+		<%= f.label :skillSet, "Skill-set*" %>
+		<%= f.text_field :skillSet %>
+	      </div>
+	      <div class="field collabRequired">
+		<%= f.label :progressLevel, "Project progress level*" %>
+	       
+		<%=f.select(:progressLevel, options_for_select([['Yet to start', 'Yet to start'], ['Started', 'Started'], ['Near completion', 'Near completion']])) %>
+		   </div>
+	      <div style="text-align:center;"><div class="actions"><%= f.submit "Submit",:class=>"submit-button" %></div></div>
+	    <% end %>
+	  </div>
+	  
+	</div>
+<% end %>

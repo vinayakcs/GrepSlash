@@ -1,0 +1,11 @@
+<% if @vote_saved==true%>
+$("#vote_error_message<%=@project.id.to_s%>").text('');
+$("#vote_count<%=@project.id.to_s%>").text(<%= @new_vote_count.to_s %>);
+<%elsif @spam==true%>
+$("#vote_error_message<%=@project.id.to_s%>").text('Caught by spam filter, try after some time');
+setTimeout(function(){ $("#vote_error_message<%=@project.id.to_s%>").text(""); }, 3000);
+<%else%>
+$("#vote_error_message<%=@project.id.to_s%>").text('Sorry technical error, vote not saved');
+setTimeout(function(){ $("#vote_error_message<%=@project.id.to_s%>").text(""); }, 3000);
+<%end%>
+

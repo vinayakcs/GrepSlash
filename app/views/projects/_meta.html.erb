@@ -1,0 +1,38 @@
+<% if isHome ==true && project.nil? %>
+<% content_for :head do %>
+         <meta name="description" content="A content curation platform for projects from all genres giving authors a chance to showcase their work." />
+         <meta name="keywords" content="projects,iit,engineering,applications,assignments,tools" />
+	 <meta property="og:title" content="GrepSlash"/>	
+	 <meta property="og:url" content="https://www.grepslash.com"/>	
+	 <meta property="og:image" content="http://www.grepslash.com/images/fb_thumb.png"/>
+	 <meta property="og:description" content="A content curation platform for projects from all genres giving authors a chance to showcase their work." />
+
+
+
+         <meta name="twitter:card" content="summary" />
+         <meta name="twitter:site" content="@GrepSlash" />
+         <meta name="twitter:title" content="GrepSlash" />
+         <meta name="twitter:description" content="A content curation platform for projects from all genres giving authors a chance to showcase their work." />
+         <meta name="twitter:image" content="http://www.grepslash.com/images/fb_thumb.png" />
+         <meta name="twitter:url" content="https://www.grepslash.com" />
+
+
+<% end %> 
+<%elsif isHome ==false && !project.nil? %>
+
+<% content_for :head do %>
+	 <meta property="og:title" content="<%=@project.name%>"/>	
+	 <meta property="og:url" content="<%= root_url+"projects/"+@project.position.to_s+ "-"+@project.permalink %>"/>	
+	 <meta property="og:image" content="<%=@project.imageurl%>"/>
+	 <meta property="og:description" content="<%=@project.notes%>" />
+
+         <meta name="twitter:card" content="summary" />
+         <meta name="twitter:site" content="@GrepSlash" />
+         <meta name="twitter:title" content="<%=@project.name%>" />
+         <meta name="twitter:description" content="<%=@project.notes%>" />
+         <meta name="twitter:image" content="<%=@project.imageurl%>" />
+         <meta name="twitter:url" content="<%= root_url+"projects/"+@project.position.to_s+ "-"+@project.permalink %>" />
+
+<% end %> 
+
+<%end%>

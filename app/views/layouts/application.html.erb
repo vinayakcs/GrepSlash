@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="google-site-verification" content="ViuN71yQFxl6RNyHQw1Cf3kxCi8mh0RYcFBT-76iRLQ" />
+    <title><%= content_for?(:title) ? yield(:title) : "Grepslash" %> </title>
+	
+  	 <%= stylesheet_link_tag "application", "coderay", "dialog", "button", "fav_panel", "fav_button"%>
+  	 <%= javascript_include_tag "jquery.min", "rails", "favourite","application" %>
+    <%# stylesheet_link_tag Rails.env.production? ? 'application.min' :'application' %>
+    <%# stylesheet_link_tag Rails.env.production? ? 'coderay.min' :'coderay' %>
+    <%# stylesheet_link_tag Rails.env.production? ? 'dialog.min' :'dialog' %>
+    <%# stylesheet_link_tag Rails.env.production? ? 'button.min' :'button' %>
+    <%# stylesheet_link_tag Rails.env.production? ? 'fav_panel.min' :'fav_panel' %>
+    <%# stylesheet_link_tag Rails.env.production? ? 'fav_button.min' :'fav_button' %>
+
+    <%# javascript_include_tag "jquery.min" %>
+    <%# javascript_include_tag Rails.env.production? ? 'rails.min' :'rails' %>
+    <%# javascript_include_tag Rails.env.production? ? 'favourite.min' :'favourite' %>
+    <%# javascript_include_tag Rails.env.production? ? 'application.min' :'application' %>
+
+
+
+
+    <%= csrf_meta_tag %>
+    <%= auto_discovery_link_tag(:rss, "http://www.grepslash.com/rssFeed.atom", {title: "Grep Feeds"}) %>
+    <%= yield(:head) %>
+ </head>
+  <body >
+    <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+
+<% cache 'header' do %>
+	<div id="fb-root"></div>
+    <%= javascript_include_tag Rails.env.production? ? 'fb_root_script' :'fb_root_script.min' %>
+
+   <div id="top">
+
+      <!--div class="logo"><%= link_to image_tag("logo.png", :size => "210x80", :alt => "Grepslash"), root_path %></div-->
+
+		<div id="nav_bar">
+
+    	<div class="logo nav-bar-element"><a href=<%= root_path %>>> grepslash</a></div>
+
+		<div class="nav-bar-element">
+      <%= form_tag projects_path, :method => "get" do %>
+        <%= text_field_tag :search, params[:search], :size => 30, :class=>'search-text-field' %>
+	<%= image_submit_tag("/images/icons/search.svg", class: 'search-button', alt: 'Find')%>	
+      <% end %>
+      </div>
+      
+		<div class="nav-bar-element">
+      	<ul class="nav horizontal highlight">
+        		<li><%= link_to "Browse", { controller: "projects", action: "index" } %></li>
+		  		<li><%= link_to "TechFeeds", feed_path %></li>
+	         <li><%= link_to "Submit Project", submitProject_path %></li>
+   	      <li><%= link_to "About", about_path %></li>
+	      </ul>
+    	</div>
+    	</div>
+    
+    <div class="subscribe">
+      <ul class="horizontal">
+       	<li>
+        		<a class="twitter-follow-button"	href="https://twitter.com/grepslash" data-show-count="false" 
+        			data-lang="en">Follow @grepslash	</a>
+				<script>window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));</script>        
+		  	</li>
+        	<!--li>
+          		<div class="fb-follow" data-href="https://www.facebook.com/grepslash7" data-colorscheme="light" data-layout="button" data-show-faces="true"></div>
+        	</li-->
+         <!--li>
+				<a id="bookmarkme" href="#" rel="sidebar" title="Grepslash"><img src="/images/icons/bookmark.png" width="34" ></a>
+	 			<span class="name">Bookmark Grepslash</span>
+	 		</li-->
+    		<!--li>
+          <%# link_to image_tag("icons/rss.png", :size => "34x34"), root_url+"rssFeed.atom" %>
+          <span class="name">Grep our RSS</span>
+         </li-->
+      </ul>
+    </div>
+	
+	<div id="slideout">
+		<img src="/images/favourites.png" alt="Favourites" width="30px"/>
+		<div id="slideout_inner_head">Your favourites</div>
+		<div id="slideout_inner">
+		<div id="fav" style="color:#1B97F2;font-weight:bold;"></div>
+		</div>
+	</div>
+
+   <div id="slideout2">
+  		<img src="/images/feedback.png" alt="Feedback" width="30px"/>
+  		<div id="slideout_inner2">
+  		<div id="userFeedback" style="margin:10px;">
+		<div id="userFeedback_update_msg"></div>			
+			<table>			
+			<tr><td>Feedback type</td><td><select id="feedbackType"><option value="complaint">Complaint</option><option value="appreciation">Appreciation</option></select></td></tr>
+			<tr><td>Email</td><td><input type="text" id="email" ></td></tr>
+			<tr><td>Description<sup>*</sup></td><td><textarea rows="6" cols="28" id="description"></textarea></td></tr>
+			</table>			
+			<div style="text-align:center;margin:10px;"><span class="feedback-button" style="width:50%;margin:0 auto;" id="submitUserFeedback">Submit</span></div>
+		</div>
+		</div>
+	</div>
+</div>
+<% end%> 
+
+    <div id="main">
+      <% if show_title? %>
+        <h1 class="content"><%= yield(:title) %></h1>
+      <% end %>
+
+      <%= yield %>
+    </div>
+
+
+<% cache 'footer' do %>
+<div id="footer">
+	<div class="inner">
+		<a href="#howworks-box" class="howworks-window footer-button">How it works</a>
+		<div id="howworks-box" class="howworks-popup" >
+		<a href="#" class="close"><img src="/images/close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>
+		<div class="features" >
+		<span ><img src="/images/how_it_works/search.png" width="250px"/><p>Discover projects by searching for keywords</p></span>
+		<span><img src="/images/how_it_works/views.png" width="250px"/><p>Change view from the panel above categories</p></span>
+		<span><img src="/images/how_it_works/tags.png" width="250px"/><p>All projects are tagged, click them to filter projects</p></span>
+		<span><img src="/images/how_it_works/fav.png" width="250px"/><p>Click on + icon next to project name on home or project page</p></span>
+		<br>
+		<span ><img src="/images/how_it_works/submit.png" width="250px"/><p>Navigate to the project submission form from the navigation panel</p></span>
+		<span><img src="/images/how_it_works/review.png" width="250px"/><p>Project is featured only after a review, we curate only quality content</p></span>
+		<span><img src="/images/how_it_works/collaborators.png" width="250px"/><p>While submitting a project, check the “Looking for collaborators” check box</p></span>
+		<span><img src="/images/how_it_works/techfeeds.png" width="250px"/><p>A single destination for all trending tech news from top tech sites</p></span>
+		</div>
+		</div>
+	</div>
+	<div style="text-align:center"><b>Thank you for visiting Grepslash
+	<br> Follow us at Facebook and Twitter to stay in touch with the highlights, new features and important updates</b></div>
+	<!--div class="footer-link-container">
+	<div class="footer-link"><%= link_to "Sitemap", sitemap_path %></div>
+	<div class="footer-link"><%= link_to "Contact us", about_path %></div>
+	</div-->	
+</div>
+	
+    <%= javascript_include_tag Rails.env.production? ? 'googleAnalytics' :'googleAnalytics.min' %>
+    <%= javascript_include_tag Rails.env.production? ? 'userFeedback' :'userFeedback' %>	      
+<% end %>
+
+
+
+  </body>
+  </html>

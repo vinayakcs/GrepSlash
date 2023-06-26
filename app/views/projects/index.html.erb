@@ -1,0 +1,90 @@
+<% title "GrepSlash", false %>
+<%= render :partial => 'projects/meta', :locals => {:isHome => true, :project=> nil} %>
+<div class="content">
+  <div class="side">
+
+    <div id="filter" class="project_sort">
+    Sort :
+    <!--span class="filter">&#x25BC |</span>
+    <span class="filter">&#x25B2 |</span-->
+      <span class="filter"><%= link_to_unless  request.fullpath=="/" ,"date" %> | </span>
+      <span class="filter"><%= link_to_unless params[:filter] =="votes","vote" ,request.parameters.merge(:filter => "votes"), :title => "Votes" %> | </span>
+      <span class="filter"><%= link_to_unless params[:filter] =="views","view" ,request.parameters.merge(:filter => "views"), :title => "Views" %></span>
+       
+    </div>
+
+    <div class="project_views">
+      View :
+      <span class="view"><%= link_to_unless params[:view].blank?, image_tag("views/full.png", :size => "15x10"), request.parameters.merge(:view => nil, :page => nil), :title => "Full View" %></span>
+      <span class="view"><%= link_to_unless params[:view] == "list", image_tag("views/list.png", :size => "14x10"), request.parameters.merge(:view => "list", :page => nil), :title => "List View" %></span>
+      <span class="view"><%= link_to_unless params[:view] == "grid", image_tag("views/grid.png", :size => "11x10"), request.parameters.merge(:view => "grid", :page => nil), :title => "Grid View" %></span>
+    </div>
+
+    <div class="categories">
+      <h2>Tags</h2>
+      <ul>
+      <% for tag in Tag.order("name") %>
+        <li><%= link_to_unless(params[:tag_id].to_i == tag.id, tag.display_name, request.parameters.merge(:tag_id => tag.id, :page => nil)) %></li>
+      <% end %>
+      </ul>
+    </div>
+
+  </div>
+
+
+  <div class="projects">
+    <% if @tag || params[:search].present? %>
+      <div class="filters">
+        <strong>Filtering:</strong>
+        <% if params[:search].present? %>
+          <span class="filter"><%= params[:search] %> <%= link_to "x", request.params.merge(:search => nil, :page => nil) %></span>
+        <% end %>
+        <% if @tag %>
+          <span class="filter"><%= @tag.display_name %> <%= link_to "x", request.params.merge(:tag_id => nil, :page => nil) %></span>
+        <% end %>
+      </div>
+    <% end %>
+    <% if @projects.empty? %>
+      <p class="content">No projects found. <%= link_to "See all projects.", projects_path %></p>
+    <% else %>
+      <% if params[:view].nil? %>
+        <div class="full">
+          <%= render @projects %>
+        </div>
+      <% elsif params[:view] == "list" %>
+        <table class="list">
+          <tr>
+
+            <th>Name</th>
+
+            <th>Released</th>
+          </tr>
+          <% for project in @projects %>
+            <tr>
+
+              <td><%= link_to project.name, project, :remote=>true %></td>
+
+              <td><%= project.published_at.strftime('%b %d, %Y') %></td>
+            </tr>
+          <% end %>
+        </table>
+      <% elsif params[:view] == "grid" %>
+        <div class="grid">
+          <% for project in @projects %>
+            <div class="project">
+              <div class="screenshot"><%= link_to image_tag("#{project.imageurl}", :size => "200x125", lazy: true), project, :remote=>true %></div>
+              <div class="name">
+                #<%= project.position %>
+                <%= link_to project.name, project, :remote=>true %>
+              </div>
+            </div>
+          <% end %>
+          <div class="clear"></div>
+        </div>
+      <% end %>
+
+      <%= will_paginate :previous_label => h("< Previous Page"),  :next_label => h("Next Page >") %>
+    <% end %>
+  </div>
+
+</div>

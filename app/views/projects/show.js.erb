@@ -1,0 +1,1 @@
+$("#project .nav_section").html("<%= escape_javascript(%w[authors similar].include?(params[:view]) ? render(params[:view]) : render("show_notes")) %>");

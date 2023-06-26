@@ -1,0 +1,81 @@
+<% title @project.full_name, false %>
+<%= render :partial => 'projects/meta', :locals => {:isHome => false, :project => @project} %>
+
+<div style="text-align:center;">
+<div id="project">
+
+  <div class="info">
+    <div class="screenshot"><%= link_to image_tag(@project.imageurl, :size => "200x125", :alt => @project.name,lazy: true)%></div>
+	 <div class="project-title-container">
+		
+		 <div class="project-title-element">
+	 		<h1><span class="position">#<%= @project.position %></span><%= @project.name %></h1>
+	 	</div>
+
+		<div class="favourite project-title-element" style="cursor:pointer;"><span class="addtofav" title="Add to favourites"></span>
+		</div>
+
+		<div id="project_vote" class="project-title-element">
+			<%= render :partial => "/votes/vote", :locals => { :project=>@project} %>
+		</div>
+	</div>
+	<div id="vote_error_message<%=@project.id.to_s%>" class="vote-error"></div>
+
+
+    <div class="details">
+      <%= @project.published_at.strftime('%b %d, %Y') %> |
+      <%= raw @project.tags.map { |tag| link_to tag.display_name, root_path(:tag_id => tag) }.join(", ") %>
+      <% unless @project.published? %>
+        <span class="unreleased">NOT YET RELEASED</span>
+      <% end %>
+    </div>
+
+	<% if @project.collaborationRequired==true%>
+		<div id="collaboration_required" class="project-title-container">
+		<div class="project-title-element"><a title="Collaboration required"><img src="/images/icons/handshake2.png" height="35px"/></a></div>
+		<div class="project-title-element" style="color:#7A52CC;">Skill-set needed - <%= @project.skillSet %></div>
+		</div>
+		<div class="more-details">Project type - <%= @project.projectType %></div>	
+      <div class="more-details">Progress level - <%= @project.progressLevel %></div>	
+  <% end%>
+    
+    <div class="description" ><%= @project.notes %></div>
+
+	<%# download option of source code , got to test once %>
+
+    <div class="clear"></div>
+  </div>
+  <ul class="nav horizontal" >
+    <li class="selected" ><%= tab_link "Full Description", :view => nil %></li>
+    <% if @project.authors.present? %>
+	    <li><%= tab_link "About the Author", :view => "authors" %></li>
+     <% end%>
+    <!--li><% tab_link "Similar Projects", :view => "similar" %></li-->
+    <%= content_tag :li, link_to("Next Project >", @project.next), :class => "next" if !@project.last_published? && @project.next %>
+    <%= content_tag :li, link_to("< Previous Project", @project.previous), :class => "previous" if @project.previous %>
+  </ul>
+  <div class="nav_section">
+    <%= %w[authors similar].include?(params[:view]) ? render(params[:view]) : render("show_notes") %>
+  </div>
+  
+  <div class="similar-projects-title">Similar projects</div>
+	<div class="similar-projects-content">
+		<%@similar_projects=Project.get_similar_projects(@project.id)%>
+		<%@similar_projects.each do |similarProj| %>
+		<div class="similar-project">
+			<a href="<%= project_url(similarProj,:host=>"grepslash.com") %>"><%= similarProj.name%></a>
+			<%= similarProj.notes%>	
+		</div>
+		<%end%>
+	</div>
+</div>
+
+
+<div style="display:inline-block;vertical-align:top;">
+<%= render :partial => 'projects/social', :locals => { :project => @project} %>
+<div id="project_comment" style="width:200px;margin-left:0;text-align:left;">
+<%= render :partial => "/comments/display", :locals => {:commentts => @project.comments, :project=>@project} %>
+</div>
+
+
+</div>

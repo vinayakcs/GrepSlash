@@ -1,0 +1,14 @@
+<div id="vote_widget<%=project.id.to_s%>">
+<div id="vote_up_icon<%=project.id.to_s%>" style="display:inline-block;">
+<%= form_for(project, remote: true, :url => :manageVote ) do |f| %>
+<div><%= f.hidden_field :vote_type, value: "up" %></div>
+<div><%= f.hidden_field :project_id, value: project.id %></div>
+<%= f.submit "up", :class => "up_vote no-expand", :title => "Upvote", :type => :image, :src => path_to_image("/images/icons/upvote.png") %>
+<% end %>
+</div><!-- vote_up_icon-->
+
+<div id="vote_count<%=project.id.to_s%>" style="display:inline-block;">
+<%= project.vote_count %>
+</div>
+
+</div><!-- vote_widget-->

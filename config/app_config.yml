@@ -1,0 +1,7 @@
+session_key: "_crusaders_session"
+session_secret: 822269348d090718a677174799965c2e3a4e6a42ccdd9a4bfcf76a1ebffd4893d596996c81dd0309b7674663c2311c253d07d4188430f42ee4559fcc41fd85f9
+thinking_sphinx: false
+github_id: oauth_id
+github_secret: oauth_secret
+antispam_duration: 30
+site_root_url: "http://www.grepslash.com/"

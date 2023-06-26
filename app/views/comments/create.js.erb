@@ -1,0 +1,20 @@
+<% if @comment_saved==true%>
+$('#comment_error_message').text('');
+$('#comments_count').text("<%=pluralize(@new_comment_count, 'comment') %>");
+$('#comment_content').show();
+$('#comment_content').prepend("<%=escape_javascript(render :partial => '/comments/comment',:locals => {:comment=>@comment})%>");
+$('#comment_<%=@comment.id%>').hide().fadeIn("slow");
+$('#comment_description').val('');
+$('#comment_user_name').val('');
+<%elsif @spam==true%>
+$('#comment_error_message').text('Caught by spam filter, try after some time');
+setTimeout(function(){ $('#comment_error_message').text(""); }, 3000);
+<%else%>
+$('#comment_error_message').text('Sorry technical error, comment not saved');
+setTimeout(function(){ $('#comment_error_message').text(""); }, 3000);
+<%end%>
+
+
+
+
+

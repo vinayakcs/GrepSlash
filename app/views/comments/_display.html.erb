@@ -1,0 +1,21 @@
+<div id="comment_error_message" class="comment-error"></div>
+<div id="comments_list">
+	
+<%= render :partial => "/comments/new_comment",:locals => {:project => project} %>
+<div id ="comments_count" class="comment-count-display">
+	<%if commentts.size == 0%>
+	Be the first to comment
+	<%else%> 
+	<%=pluralize(commentts.size, 'comment')%>
+	<%end%>
+</div>
+
+	<div id="comment_content" class="comments">
+	<%commentts.recent.each do |c|%>
+	<%=render :partial => "/comments/comment",:locals => {:comment=>c}%>
+	<%end%>
+	</div>
+	<%if commentts.size == 0%>
+		<script>$('#comment_content').hide();</script>
+	<%end%>
+</div>

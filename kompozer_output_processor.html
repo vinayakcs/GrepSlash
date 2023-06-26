@@ -1,0 +1,32 @@
+<html>
+<body>
+<textarea name="getText" id="getText"></textarea>
+<button id="process" type="button">process</button>
+<br><br>
+Html: &nbsp;&nbsp;&nbsp;<div id="processedHtml"></div>
+<br>
+Text:&nbsp;&nbsp;&nbsp;<div id="processedText"></div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+$(function(){
+$('#process').on('click',function(){
+
+var htmlText=$('#getText').val();
+console.log(htmlText);
+if(htmlText.indexOf('<body>')>=0 && htmlText.indexOf('</body>')>=0){
+htmlText=htmlText.substring(htmlText.lastIndexOf("<body>")+6,htmlText.lastIndexOf("</body>"));
+}
+htmlText=htmlText.replace(/(\r\n|\n|\r)/gm,"");
+htmlText=htmlText.replace("\\","\\\\");
+htmlText=htmlText.replace("'","\'");
+console.log(htmlText);
+$('#processedHtml').html(htmlText);
+$('#processedText').text(htmlText);
+
+});
+});
+</script>
+
+
+</body>
+</html>

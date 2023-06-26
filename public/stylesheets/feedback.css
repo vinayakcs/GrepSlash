@@ -1,0 +1,27 @@
+#feedback-window {
+  position: fixed;
+  top: 40px;
+  left: 0;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+#feedback-window-inner {
+  position: fixed;
+  top: 40px;
+  left: -250px;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+#feedback-button:hover #feedback-window{
+  left: 250px;
+}
+
+#feedback-button:hover #feedback-window-inner {
+  left: 0;
+}

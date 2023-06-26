@@ -1,0 +1,13 @@
+
+   <% if social=="fb" %>
+           <%= form_tag fbpage_path do %>
+            <%= text_field_tag "proj_id"%>
+            <%= submit_tag "Broadcast (click only once)" %>
+           <% end %>
+   <% elsif social=="tweet" %>
+           <%= form_tag tweet_path do %>
+            <%= text_field_tag "proj_id"%>
+            <%= submit_tag "Broadcast (click only once)" %>
+           <% end %>
+   <%end%>
+

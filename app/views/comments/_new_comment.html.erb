@@ -1,0 +1,14 @@
+<%= form_for [project,Comment.new], remote:true do |form| %>
+  <div class="comment-form-element">
+ 		<%= form.label :name, "Name*" %>
+      <%= form.text_field :name, :size => "20" %>
+  </div>
+  <div class="comment-form-element">
+      <%= form.label :comment, "Comment*" %>
+      <%= form.text_area :description, :rows => 3, :cols => 30 %>
+  </div>
+  <div class="comment-form-element">
+    <%= submit_tag "Comment", :class => 'comment-button' %>
+  </div>
+<% end %>
+

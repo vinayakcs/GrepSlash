@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  uid: MyString
+  description: MyText
+  email: MyString
+  isIssue: false
+  isThanks: false
+  rating: 1
+
+two:
+  uid: MyString
+  description: MyText
+  email: MyString
+  isIssue: false
+  isThanks: false
+  rating: 1

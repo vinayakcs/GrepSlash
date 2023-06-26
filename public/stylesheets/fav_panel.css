@@ -1,0 +1,114 @@
+#slideout{
+	position: fixed;
+	top: 250px;
+	right: 0;
+	width: 26px;
+	z-index:10;
+	-webkit-transition-duration: 0.3s;
+	-moz-transition-duration: 0.3s;
+	-o-transition-duration: 0.3s;
+	transition-duration: 0.3s;
+}
+
+#slideout_inner {
+	border-left:3px solid #339966;
+	overflow:scroll;
+	z-index:10;
+	position: fixed;
+	top: 40px;
+	right: -250px;
+	/*background: #38761D;*/
+	background: #FDFDFC;
+	width: 197px;
+	padding: 25px;
+	height:100%;
+	-webkit-transition-duration: 0.3s;
+	-moz-transition-duration: 0.3s;
+	-o-transition-duration: 0.3s;
+	transition-duration: 0.3s;
+	text-align: left;
+	-webkit-border-radius: 0 0 5px 0;
+	-moz-border-radius: 0 0 5px 0;
+	border-radius: 0 0 5px 0;
+}
+
+#slideout_inner a{
+	font-weight:normal;
+	color:#6C91DA;
+	font-size:14px;
+	font-family:font-family: ‘Lucida Sans Unicode’, ‘Lucida Grande’, sans-serif;
+} 
+#slideout:hover {
+	right: 250px;
+}
+
+#slideout:hover #slideout_inner {
+	right: 0;
+}
+
+#slideout_inner_head {
+	z-index:11;
+	position: fixed;
+	top: 0px;
+	right: -250px;
+	background: #339966;
+	width: 200px;
+	padding: 25px;
+	margin:0px auto;
+	height:10px;
+	-webkit-transition-duration: 0.3s;
+	-moz-transition-duration: 0.3s;
+	-o-transition-duration: 0.3s;
+	transition-duration: 0.3s;
+	text-align: center;
+	color:#FDFDFC;
+	font-weight:bold;
+	font-size:22;
+}
+		
+#slideout:hover #slideout_inner_head {
+	right: 0;
+}
+
+#slideout2 {
+  position: fixed;
+  top: 360px;
+  right: 0;
+  z-index:10;
+  width:26px;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+#slideout_inner2 {
+  position: fixed;
+  background:white;
+  top: 335px;
+  right: -384px;
+  z-index:11;
+  border-left:3px solid #6C91DA;
+  border-top:3px solid #6C91DA;
+  border-bottom:3px solid #6C91DA;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+#slideout2:hover {
+  right: 374px;
+}
+#slideout2:hover #slideout_inner2 {
+  right: 0;
+}
+
+#userFeedback table tr td input, #userFeedback table tr td textarea {
+/*letter-spacing:1px;*/
+font-family:Arial;
+font-size:12px;
+width:240px;
+}
+
+/*#userFeedback table tr td #description{
+line-height: 48px;
+}*/

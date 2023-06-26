@@ -1,0 +1,28 @@
+
+<% if @feedback_saved==true%>
+$('#proj_sub').css('background-color', '#38761D');
+$('#proj_sub').html('Thank you for submitting your project, it will appear on Grepslash shortly after a review by our team<br>Redirecting to homepage...');
+$('#proj_sub').show();
+$("html, body").animate({
+              scrollTop: 0
+          }, 600);
+setTimeout(function(){ document.location.href = '/'; }, 8000);
+
+<%else%>
+$('#proj_sub').css('background-color', '#CC0000');
+$("html, body").animate({
+              scrollTop: 0
+          }, 600);
+var errorText = "There were errors with the submission: \n<ul>";
+	<% if @feedback_error.kind_of?(Array) %>
+	  <% @feedback_error.each do |error| %>
+	    errorText += "<li id='submission_error'><%=error%></li> ";
+	  <%end%>
+	<%else%>
+	  errorText = "<%=@feedback_error%>";
+	<%end%>
+$('#proj_sub').html(errorText);
+$('#proj_sub').show();
+setTimeout(function(){ $('#proj_sub').text(''); $('#proj_sub').hide(); }, 8000);
+<%end%>
+
